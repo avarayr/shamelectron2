@@ -1,26 +1,33 @@
-import Image from "next/image";
 import { AppRecord, FixedStatus } from "@/types";
-import { CheckCircle2, XCircle, HelpCircle, TwitterIcon } from "lucide-react";
+import {
+  HelpCircle,
+  ThumbsDownIcon,
+  ThumbsUpIcon,
+  TwitterIcon,
+} from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { cloneElement } from "react";
+import { twMerge } from "tailwind-merge";
 
 function StatusIndicator({ status }: { status: FixedStatus }) {
   const getStatusDisplay = () => {
     switch (status) {
       case "fixed":
         return {
-          Icon: CheckCircle2,
+          Icon: <ThumbsUpIcon />,
           color: "text-green-400",
           bgColor: "bg-green-400/10",
         };
       case "not_fixed":
         return {
-          Icon: XCircle,
+          Icon: <ThumbsDownIcon />,
           color: "text-red-400",
           bgColor: "bg-red-400/10",
         };
       default:
         return {
-          Icon: HelpCircle,
+          Icon: <HelpCircle />,
           color: "text-gray-400",
           bgColor: "bg-gray-400/10",
         };
@@ -33,7 +40,9 @@ function StatusIndicator({ status }: { status: FixedStatus }) {
     <div
       className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg ${bgColor} flex items-center justify-center border border-gray-800`}
     >
-      <Icon className={`${color} w-5 h-5 sm:w-6 sm:h-6`} />
+      {cloneElement(Icon, {
+        className: twMerge(Icon.props.className, color, "size-5 sm:size-6"),
+      })}
     </div>
   );
 }
