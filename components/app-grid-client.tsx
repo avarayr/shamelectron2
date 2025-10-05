@@ -6,17 +6,24 @@ import { AppRecord } from "@/types";
 import { AppRow } from "./app-card";
 import { twMerge } from "tailwind-merge";
 import { atomWithLocalStorage } from "./hooks/atomWithLocalStorage";
+import { X } from "lucide-react";
 
 type ViewMode = "default" | "grouped";
 const viewModeAtom = atomWithLocalStorage<ViewMode>("viewMode", "grouped");
 
 export function AppGridClient({ apps }: { apps: AppRecord[] }) {
   const [viewMode, setViewMode] = useAtom(viewModeAtom);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // Group apps by status
-  const fixedApps = apps.filter((app) => app.isFixed === "fixed");
-  const notFixedApps = apps.filter((app) => app.isFixed === "not_fixed");
-  const unknownApps = apps.filter((app) => app.isFixed === "unknown");
+  // Filter apps based on search query
+  const filteredApps = apps.filter((app) =>
+    app.friendlyName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Group filtered apps by status
+  const fixedApps = filteredApps.filter((app) => app.isFixed === "fixed");
+  const notFixedApps = filteredApps.filter((app) => app.isFixed === "not_fixed");
+  const unknownApps = filteredApps.filter((app) => app.isFixed === "unknown");
 
   // Sort each group alphabetically
   const sortedFixed = [...fixedApps].sort((a, b) =>
@@ -33,7 +40,7 @@ export function AppGridClient({ apps }: { apps: AppRecord[] }) {
     if (viewMode === "default") {
       return (
         <div className="space-y-0">
-          {apps.map((app) => (
+          {filteredApps.map((app) => (
             <AppRow key={app.id} app={app} />
           ))}
         </div>
@@ -105,11 +112,38 @@ export function AppGridClient({ apps }: { apps: AppRecord[] }) {
 
   return (
     <>
-      {/* Table Header with View Toggle */}
+      {/* Search and View Toggle */}
       <div className="mb-4">
-        <div className="flex items-center justify-end gap-3 sm:gap-6">
+        <div className="flex items-center gap-3 sm:gap-4">
+          {/* Search Input */}
+          <div className="flex-1 relative">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search..."
+              className={twMerge(
+                "w-full px-4 py-2.5 font-mono text-sm",
+                "bg-black border-2 rounded-lg",
+                "text-white placeholder:text-gray-500",
+                "focus:outline-none focus:border-red-500",
+                "transition-colors",
+                searchQuery ? "border-red-500" : "border-gray-800"
+              )}
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-red-500 hover:text-red-400 transition-colors"
+                aria-label="Clear search"
+              >
+                <X className="size-5" />
+              </button>
+            )}
+          </div>
+
           {/* View Mode Toggle */}
-          <div className="flex items-center gap-2 bg-gray-900/50 rounded-lg p-1 border border-gray-800">
+          <div className="flex items-center gap-2 bg-gray-900/50 rounded-lg p-1 border border-gray-800 flex-shrink-0">
             <button
               onClick={() => setViewMode("default")}
               className={twMerge(
