@@ -1,5 +1,5 @@
 import { AppRecord } from "@/types";
-import { AppRow } from "./app-card";
+import { AppGridClient } from "./app-grid-client";
 import { Footer } from "./footer";
 import TimeAgo from "./time-ago";
 
@@ -138,34 +138,8 @@ export function AppGrid({ apps }: { apps: AppRecord[] }) {
           </div>
         </div>
 
-        {/* Table Header */}
-        <div className="mb-4">
-          <div className="flex items-center gap-3 sm:gap-6 py-2 border-b border-gray-800">
-            <div className="w-10 sm:w-12">
-              <span className="text-xs text-muted font-mono uppercase tracking-wide">
-                status
-              </span>
-            </div>
-            <div className="w-6 sm:w-8"></div>
-            <div className="flex-1">
-              <span className="text-xs text-muted font-mono uppercase tracking-wide">
-                app
-              </span>
-            </div>
-            <div className="w-12 sm:w-16 text-center">
-              <span className="text-xs text-muted font-mono uppercase tracking-wide">
-                social
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Apps List */}
-        <div className="space-y-0">
-          {apps.map((app) => (
-            <AppRow key={app.id} app={app} />
-          ))}
-        </div>
+        {/* Apps List with Client-Side Toggle */}
+        <AppGridClient apps={apps} />
 
         {/* Footer */}
         <Footer />
