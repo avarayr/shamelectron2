@@ -49,7 +49,7 @@ function StatusIndicator({ status }: { status: FixedStatus }) {
 
 export function AppRow({ app }: { app: AppRecord }) {
   return (
-    <div className="flex items-center gap-3 sm:gap-6 py-3 sm:py-4 border-b border-dashed-subtle border-gray-800 hover:bg-gray-900/20 transition-colors">
+    <div className="flex items-center gap-3 sm:gap-6 py-3 sm:py-4 border-b border-dashed-subtle border-gray-800 hover:bg-gray-900/20">
       {/* Status - Now the main focus */}
       <StatusIndicator status={app.isFixed} />
 
