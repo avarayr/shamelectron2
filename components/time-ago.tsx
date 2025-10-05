@@ -20,7 +20,7 @@ function getTimeAgoString(updatedAt: Date, now: Date = new Date()): string {
 
 const TimeAgo = ({ updatedAt }: { updatedAt: Date }) => {
   // Avoid computing dynamic time on the server to prevent hydration mismatch.
-  const [timeAgo, setTimeAgo] = useState<string>("-- ago");
+  const [timeAgo, setTimeAgo] = useState<string>("--- ago");
 
   useEffect(() => {
     // Update every minute for accuracy, or every second if less than a minute ago
