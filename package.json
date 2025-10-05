@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "bunx --bun next dev",
+    "dev:no-update": "NO_UPDATE=true bunx --bun next dev",
     "build": "bunx --bun next build",
     "start": "bunx --bun next start",
     "lint": "bunx --bun next lint"

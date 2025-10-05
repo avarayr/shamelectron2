@@ -19,7 +19,8 @@ function getTimeAgoString(updatedAt: Date, now: Date = new Date()): string {
 }
 
 const TimeAgo = ({ updatedAt }: { updatedAt: Date }) => {
-  const [timeAgo, setTimeAgo] = useState(() => getTimeAgoString(updatedAt));
+  // Avoid computing dynamic time on the server to prevent hydration mismatch.
+  const [timeAgo, setTimeAgo] = useState<string>("-- ago");
 
   useEffect(() => {
     // Update every minute for accuracy, or every second if less than a minute ago
@@ -37,6 +38,7 @@ const TimeAgo = ({ updatedAt }: { updatedAt: Date }) => {
     return () => clearInterval(timer);
   }, [updatedAt]);
 
+  // Render an empty string on first SSR and initial client render; effect will populate.
   return <>{timeAgo}</>;
 };
 
