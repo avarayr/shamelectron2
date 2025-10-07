@@ -5,7 +5,7 @@ export const Postman: AppMeta = {
   icon: "https://cdn.brandfetch.io/idrVtxty7B/w/128/h/128/theme/dark/icon.png?c=1bxid64Mup7aczewSAYMX&t=1667906412376",
   id: "postman-stable",
   friendlyName: "Postman",
-  twitter: "postman",
+  twitter: "getpostman",
   async checkIsFixed() {
     const url = "https://dl.pstmn.io/download/latest/osx_arm64";
     const pat = "_cornerMask";
