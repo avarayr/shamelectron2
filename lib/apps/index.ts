@@ -16,6 +16,7 @@ import { Figma } from "./figma";
 import { GitHubDesktop } from "./github-desktop";
 import { GitKraken } from "./gitkraken";
 import { Hey } from "./hey";
+import { Keeper } from "./keeper";
 import { Kiro } from "./kiro";
 import { LMStudio } from "./lmstudio";
 import { Logseq } from "./logseq";
@@ -55,6 +56,7 @@ export const APPS: AppMeta[] = [
   Figma,
   GitHubDesktop,
   GitKraken,
+  Keeper,
   Hey,
   Kiro,
   LMStudio,
