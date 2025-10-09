@@ -1,9 +1,9 @@
+import { FixedStatus, type AppMeta } from "@/types";
 import { findPattern } from "@/lib/findPattern";
-import { FixedStatus, type AppMeta } from "../../types";
 
 export const HeroicGamesLauncher: AppMeta = {
   // prettier-ignore
-  icon: "https://heroicgameslauncher.com/_next/static/images/logo-23215e07e1919bee380591f74ace6c70.png.webp",
+  icon: "https://avatars.githubusercontent.com/u/77549103?s=128",
   id: "heroic-games-launcher",
   friendlyName: "Heroic Games Launcher",
   twitter: "HeroicLauncher",
